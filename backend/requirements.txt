@@ -8,7 +8,6 @@ httpx>=0.24.0
 lz4
 orjson
 Pillow==10.4.0
-psycopg2-binary
 pydantic-settings
 pydantic[email]
 pyhumps==3.8.0

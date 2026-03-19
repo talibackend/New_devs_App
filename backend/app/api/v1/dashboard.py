@@ -2,6 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from typing import Dict, Any
 from app.services.cache import get_revenue_summary
 from app.core.auth import authenticate_request as get_current_user
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 

@@ -9,9 +9,15 @@ logger = logging.getLogger(__name__)
 
 class Settings(BaseSettings):
     # Core settings
-    database_url: str = "postgresql://postgres:postgres@db:5432/propertyflow"
+    database_url: str = "postgresql+asyncpg://postgres:postgres@db:5432/propertyflow"
     redis_url: str = "redis://redis:6379/0"
     secret_key: str = "debug_challenge_secret"
+
+    pg_db_user: str = "postgres"
+    pg_db_password: str = "postgres"
+    pg_db_host: str = "localhost"
+    pg_db_port: str = "5433"
+    pg_db_name: str = "propertyflow"
     
     # Optional legacy settings
     supabase_url: Optional[str] = None

@@ -1,6 +1,11 @@
 from datetime import datetime
 from decimal import Decimal
 from typing import Dict, Any, List
+from contextlib import asynccontextmanager
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_session=None) -> Decimal:
     """
@@ -42,9 +47,12 @@ async def calculate_total_revenue(property_id: str, tenant_id: str) -> Dict[str,
         # Initialize pool if needed
         db_pool = DatabasePool()
         await db_pool.initialize()
+
+        logger.error("Got here...")
         
         if db_pool.session_factory:
             async with db_pool.get_session() as session:
+                logger.error("Got here...")
                 # Use SQLAlchemy text for raw SQL
                 from sqlalchemy import text
                 
@@ -62,7 +70,10 @@ async def calculate_total_revenue(property_id: str, tenant_id: str) -> Dict[str,
                     "property_id": property_id, 
                     "tenant_id": tenant_id
                 })
+                logger.error("Got here...")
                 row = result.fetchone()
+
+                logger.info(result)
                 
                 if row:
                     total_revenue = Decimal(str(row.total_revenue))
